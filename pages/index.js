@@ -25,7 +25,7 @@ const navStyle = css({
   '& li': {
     display: 'inline-block',
     textTransform: 'uppercase',
-    marginRight: '3em',
+    margin: '2em 3em 2em 0em',
     fontWeight: 'bolder'
   }
 })
