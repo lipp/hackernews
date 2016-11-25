@@ -1,4 +1,6 @@
 import React from 'react'
+import css from 'next/css'
+import Head from 'next/head'
 import Link from 'next/link'
 import moment from 'moment'
 import {fetchStories} from '../api'
@@ -6,7 +8,7 @@ import {fetchStories} from '../api'
 const categories = ['show', 'job', 'ask']
 
 const Nav = () => (
-  <nav>
+  <nav className={navStyle}>
     <ul>
       {categories.map(cat => (
         <li key={cat}>
@@ -19,6 +21,15 @@ const Nav = () => (
   </nav>
 )
 
+const navStyle = css({
+  '& li': {
+    display: 'inline-block',
+    textTransform: 'uppercase',
+    marginRight: '3em',
+    fontWeight: 'bolder'
+  }
+})
+
 const Story = ({story}) => (
   <div>
     <h4><a href={story.url}>{story.title}</a></h4>
@@ -28,6 +39,11 @@ const Story = ({story}) => (
     </span>
   </div>
 )
+
+const storyStyle = css({
+  '& h4': {
+  }
+})
 
 const Stories = ({stories}) => (
   <ol>
@@ -39,7 +55,7 @@ const Stories = ({stories}) => (
   </ol>
 )
 
-export default class extends React.Component {
+class App extends React.Component {
 
   static async getInitialProps ({query: {category = 'show'}}) {
     return fetchStories(category)
@@ -48,10 +64,25 @@ export default class extends React.Component {
   render () {
     const {stories} = this.props
     return (
-      <div>
+      <div className={appStyle}>
+        <Head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </Head>
         <Nav />
-        { stories ? <Stories stories={this.props.stories}/> : <p>Loading...</p> }
+        <Stories stories={this.props.stories} />
       </div>
    )
   }
 }
+
+const appStyle = css({
+  fontFamily: 'Verdana, Geneva, sans-serif',
+  color: '#333',
+  margin: '0 auto',
+  maxWidth: 800,
+  '& a': {
+    textDecoration: 'none'
+  }
+})
+
+export default App
