@@ -1,0 +1,23 @@
+{
+  "name": "hackernews",
+  "version": "1.0.0",
+  "description": "Isomorphic Hackernews website with the help of next.js and now",
+  "main": "index.js",
+  "repository": {
+    "url": "git@github.com:lipp/hackernews",
+    "type": "git"
+  },
+  "author": "Gerhard Preuss <gelipp@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "co": "^4.6.0",
+    "isomorphic-fetch": "^2.2.1",
+    "moment": "^2.17.0",
+    "next": "^1.1.2"
+  },
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  }
+}
