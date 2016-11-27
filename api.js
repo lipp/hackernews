@@ -1,19 +1,24 @@
-import 'isomorphic-fetch'
-import co from 'co'
+const  graphqlFetch = require('graphql-fetch')('https://www.graphqlhub.com/graphql')
 
-const baseUrl = 'https://hacker-news.firebaseio.com/v0/'
-
-const fetchJson = async (url) => {
-  const res = await fetch(url)
-  return res.json()
-} 
+const graphqlQuery = (category) => `
+{
+  graphQLHub
+  hn {
+    ${category}Stories(limit: 50) {
+      title
+      url
+      timeISO
+      by {
+        id
+      }
+    }
+  }
+}
+`
 
 const fetchStories = async (category) => {
-  const itemIds = await fetchJson(`${baseUrl}${category}stories.json`)
-  return co(function*() {
-    const items = yield itemIds.slice(0, 30).map(item => fetchJson(`${baseUrl}item/${item}.json`))
-    return {stories: items}
-  })
+  const res = await graphqlFetch(graphqlQuery(category))
+  return {stories: res.data.hn[`${category}Stories`]}
 }
 
 export {fetchStories}

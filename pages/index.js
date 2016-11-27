@@ -21,34 +21,20 @@ const Nav = () => (
   </nav>
 )
 
-const navStyle = css({
-  '& li': {
-    display: 'inline-block',
-    textTransform: 'uppercase',
-    margin: '2em 3em 2em 0em',
-    fontWeight: 'bolder'
-  }
-})
-
 const Story = ({story}) => (
   <div>
     <h4><a href={story.url}>{story.title}</a></h4>
     <span>{story.score} Points - 
-      Posted {moment.unix(story.time).fromNow()} 
-      by {story.by}
+      Posted {moment(story.timeISO).fromNow()} 
+      by {story.by.id}
     </span>
   </div>
 )
 
-const storyStyle = css({
-  '& h4': {
-  }
-})
-
 const Stories = ({stories}) => (
   <ol>
-    {stories.map(story => (
-      <li key={story.id}>
+    {stories.map((story, index) => (
+      <li key={index}>
         <Story story={story} />
       </li>
     ))}
@@ -82,6 +68,20 @@ const appStyle = css({
   maxWidth: 800,
   '& a': {
     textDecoration: 'none'
+  }
+})
+
+const navStyle = css({
+  '& li': {
+    display: 'inline-block',
+    textTransform: 'uppercase',
+    margin: '2em 3em 2em 0em',
+    fontWeight: 'bolder'
+  }
+})
+
+const storyStyle = css({
+  '& h4': {
   }
 })
 
