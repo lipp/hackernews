@@ -2,7 +2,6 @@ const  graphqlFetch = require('graphql-fetch')('https://www.graphqlhub.com/graph
 
 const graphqlQuery = (category) => `
 {
-  graphQLHub
   hn {
     ${category}Stories(limit: 50) {
       title
