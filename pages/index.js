@@ -80,9 +80,4 @@ const navStyle = css({
   }
 })
 
-const storyStyle = css({
-  '& h4': {
-  }
-})
-
 export default App
