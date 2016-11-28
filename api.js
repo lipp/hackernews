@@ -1,4 +1,4 @@
-const  graphqlFetch = require('graphql-fetch')('https://www.graphqlhub.com/graphql')
+const graphqlFetch = require('graphql-fetch')('https://www.graphqlhub.com/graphql')
 
 const graphqlQuery = (category) => `
 {
